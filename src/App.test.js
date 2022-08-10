@@ -1,8 +1,26 @@
-import { render, screen } from '@testing-library/react';
+import { render } from '@testing-library/react';
 import App from './App';
+import authStore from "./store/authStore"
 
-test('renders learn react link', () => {
-  // render(<App />);
-  // const linkElement = screen.getByText(/learn react/i);
-  // expect(linkElement).toBeInTheDocument();
+jest.mock("./store/authStore", () => ({
+  __esModule: true,
+  default: jest.fn()
+}))
+
+
+test('should render login component when not logged in', () => {
+  authStore.mockReturnValue({ loggedIn: false })
+
+  const { getByText } = render(<App />)
+
+  expect(getByText(/Login/i)).toBeDefined()
 });
+
+
+test("should render record books component when logged in",()=>{
+  authStore.mockReturnValue({ loggedIn: true })
+
+  const { getByText } = render(<App />)
+
+  expect(getByText(/recordbooks/i)).toBeDefined()
+})
