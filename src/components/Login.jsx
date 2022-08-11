@@ -13,6 +13,7 @@ function Login() {
     event.preventDefault();
     try {
       let token = await authAPI(username, password);
+      console.log(token);
       login(token);
     }
     catch (err) {}

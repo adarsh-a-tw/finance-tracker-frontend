@@ -11,6 +11,7 @@ function App() {
 
   const { loggedIn } = authStore();
   const { clearAlert, shouldAlertOpen, message, type } = alertStore();
+  const { logout } = authStore();
 
   return (
     <ThemeProvider theme={theme}>
@@ -24,7 +25,7 @@ function App() {
           </Alert>
         </Snackbar>
         <BrowserRouter>
-          {loggedIn && <Navbar onLogout={() => { }} />}
+          {loggedIn && <Navbar logout={logout} />}
           <Routes>
             {loggedIn ? (
               <Route path="/" element={<RecordBooks />} />

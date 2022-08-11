@@ -7,7 +7,7 @@ const postWithoutAuth = async (url, data) => {
     try {
         const post_url = BASE_URL + url;
         const response = await axios.post(post_url, data);
-        return { data: response.data, success: true };
+        return response.data;
     }
     catch (err) {
         let msg = err.response ? (err.response.data ? (err.response.data.message ? err.response.data.message : null) : null) : null;

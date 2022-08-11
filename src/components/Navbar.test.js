@@ -6,10 +6,10 @@ import Navbar from "./Navbar"
 describe("Navbar tests", () => {
     it("Should logout when logout button is clicked", () => {
         const logoutFn = jest.fn()
-        const { getByText } = render(<Navbar onLogout={logoutFn} />)
+        const { getByText } = render(<Navbar logout={logoutFn} />)
 
         userEvent.click(getByText("Logout"))
 
         expect(logoutFn).toHaveBeenCalledTimes(1)
-    })
+    });
 })

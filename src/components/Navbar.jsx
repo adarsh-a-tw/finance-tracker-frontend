@@ -13,7 +13,7 @@ import * as React from 'react';
 const pages = ['Products', 'Pricing', 'Blog'];
 
 
-const Navbar = ({ onLogout }) => {
+const Navbar = ({ logout }) => {
     const [anchorElNav, setAnchorElNav] = React.useState(null);
 
     const handleOpenNavMenu = (event) => {
@@ -112,7 +112,7 @@ const Navbar = ({ onLogout }) => {
                     </Box>
 
                     <Box sx={{ flexGrow: 0 }}>
-                        <Button style={{ color: "white" }} onClick={onLogout}>Logout</Button>
+                        <Button style={{ color: "white" }} onClick={logout}>Logout</Button>
                     </Box>
                 </Toolbar>
             </Container>
