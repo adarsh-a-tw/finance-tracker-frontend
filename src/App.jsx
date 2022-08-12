@@ -6,12 +6,25 @@ import RecordBooks from "./components/RecordBooks";
 import alertStore from "./store/alertStore";
 import authStore from "./store/authStore";
 import theme from "./theme";
+import { useEffect } from 'react';
 
 function App() {
 
-  const { loggedIn } = authStore();
+  const { loggedIn, logout, refreshAuth } = authStore();
   const { clearAlert, shouldAlertOpen, message, type } = alertStore();
-  const { logout } = authStore();
+
+  useEffect(() => {
+    refreshAuth();
+  }, [refreshAuth])
+
+  useEffect(() => {
+    if (loggedIn) {
+      window.intervalId = setInterval(refreshAuth, 30 * 60 * 1000);
+    }
+    else {
+      clearInterval(window.intervalId);
+    }
+  }, [loggedIn, refreshAuth])
 
   return (
     <ThemeProvider theme={theme}>

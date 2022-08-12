@@ -9,7 +9,7 @@ jest.mock("./store/authStore", () => ({
 
 
 test('should render login component when not logged in', () => {
-  authStore.mockReturnValue({ loggedIn: false })
+  authStore.mockReturnValue({ loggedIn: false, refreshAuth: jest.fn() })
 
   const { getByText } = render(<App />)
 
@@ -17,8 +17,8 @@ test('should render login component when not logged in', () => {
 });
 
 
-test("should render record books component when logged in",()=>{
-  authStore.mockReturnValue({ loggedIn: true })
+test("should render record books component when logged in", () => {
+  authStore.mockReturnValue({ loggedIn: true, refreshAuth: jest.fn() })
 
   const { getByText } = render(<App />)
 

@@ -1,7 +1,6 @@
 import { Button, Card, CardContent, Grid, TextField, Typography } from '@mui/material'
 import React, { useState } from 'react'
 import { Link } from 'react-router-dom'
-import authAPI from '../api/auth';
 import authStore from '../store/authStore';
 import theme from '../theme'
 
@@ -12,11 +11,9 @@ function Login() {
   const handleSubmit = async (event) => {
     event.preventDefault();
     try {
-      let token = await authAPI(username, password);
-      console.log(token);
-      login(token);
+      login(username, password);
     }
-    catch (err) {}
+    catch (err) { }
   }
 
   return (
