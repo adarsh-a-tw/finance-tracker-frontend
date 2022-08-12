@@ -62,7 +62,7 @@ function Login() {
                   <Button variant='contained' type='submit'>Submit</Button>
                 </Grid>
                 <Grid container>
-                  <Link to="/">
+                  <Link to="/signup">
                     Don't have an account? Sign Up
                   </Link>
                 </Grid>

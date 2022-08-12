@@ -27,7 +27,7 @@ describe("Login component tests", () => {
         const { getByLabelText, getByRole } = render(<Login />, { wrapper: BrowserRouter });
 
 
-        axios.post.mockResolvedValueOnce({ token: 'test_token' });
+        axios.post.mockResolvedValueOnce({ token: 'test_token', refresh_token: "test_refresh_token" });
 
 
         await act(async () => {

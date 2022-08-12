@@ -7,6 +7,7 @@ import alertStore from "./store/alertStore";
 import authStore from "./store/authStore";
 import theme from "./theme";
 import { useEffect } from 'react';
+import Signup from "./components/Signup";
 
 function App() {
 
@@ -43,7 +44,10 @@ function App() {
             {loggedIn ? (
               <Route path="/" element={<RecordBooks />} />
             ) : (
-              <Route path="/" element={<Login />} />
+              <>
+                <Route path="/" element={<Login />} />
+                <Route path="/signup" element={<Signup />} />
+              </>
             )}
           </Routes>
         </BrowserRouter>
