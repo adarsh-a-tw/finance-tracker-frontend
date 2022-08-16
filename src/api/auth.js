@@ -1,4 +1,4 @@
-import postWithoutAuth from "./base"
+import {postWithoutAuth} from "./base"
 
 export const authAPI = async (username, password) => {
     const data = await postWithoutAuth("/users/authenticate", { username: username, password: password });

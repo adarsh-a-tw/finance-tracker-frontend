@@ -22,5 +22,5 @@ test("should render record books component when logged in", () => {
 
   const { getByText } = render(<App />)
 
-  expect(getByText(/recordbooks/i)).toBeDefined()
+  expect(getByText(/my record books/i)).toBeDefined()
 })
