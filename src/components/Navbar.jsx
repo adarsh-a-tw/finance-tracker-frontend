@@ -10,11 +10,13 @@ import MenuItem from '@mui/material/MenuItem';
 import Toolbar from '@mui/material/Toolbar';
 import Typography from '@mui/material/Typography';
 import * as React from 'react';
-const pages = ['Products', 'Pricing', 'Blog'];
+import { Link, useNavigate } from 'react-router-dom';
+const pages = [{ page: 'Record Books', link: '/record_books' }];
 
 
 const Navbar = ({ logout }) => {
     const [anchorElNav, setAnchorElNav] = React.useState(null);
+    const navigate = useNavigate();
 
     const handleOpenNavMenu = (event) => {
         setAnchorElNav(event.currentTarget);
@@ -23,6 +25,11 @@ const Navbar = ({ logout }) => {
     const handleCloseNavMenu = () => {
         setAnchorElNav(null);
     };
+
+    const handleLogout = () => {
+        logout(); 
+        navigate("/");
+    }
 
 
     return (
@@ -75,11 +82,14 @@ const Navbar = ({ logout }) => {
                                 display: { xs: 'block', md: 'none' },
                             }}
                         >
-                            {pages.map((page) => (
-                                <MenuItem key={page} onClick={handleCloseNavMenu}>
-                                    <Typography textAlign="center">{page}</Typography>
+                            {pages.map((page_and_link) => {
+                                const { page, link } = page_and_link;
+                                return <MenuItem key={page} >
+                                    <Link to={link}>
+                                        <Typography textAlign="center">{page}</Typography>
+                                    </Link>
                                 </MenuItem>
-                            ))}
+                            })}
                         </Menu>
                     </Box>
                     <AccountBalanceWalletIcon sx={{ display: { xs: 'flex', md: 'none' }, mr: 1 }} />
@@ -100,19 +110,21 @@ const Navbar = ({ logout }) => {
                         Finance Tracker
                     </Typography>
                     <Box sx={{ flexGrow: 1, display: { xs: 'none', md: 'flex' } }}>
-                        {pages.map((page) => (
-                            <Button
+
+                        {pages.map((page_and_link) => {
+                            const { page, link } = page_and_link;
+                            return <Link
                                 key={page}
-                                onClick={handleCloseNavMenu}
-                                sx={{ my: 2, color: 'white', display: 'block' }}
+                                to={link}
+                                style={{ textDecoration: 'none', color: 'white', display: 'block' }}
                             >
                                 {page}
-                            </Button>
-                        ))}
+                            </Link>
+                        })}
                     </Box>
 
                     <Box sx={{ flexGrow: 0 }}>
-                        <Button style={{ color: "white" }} onClick={logout}>Logout</Button>
+                        <Button style={{ color: "white" }} onClick={handleLogout}>Logout</Button>
                     </Box>
                 </Toolbar>
             </Container>

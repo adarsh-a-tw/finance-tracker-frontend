@@ -1,5 +1,5 @@
 import { ThemeProvider, Snackbar, Alert } from "@mui/material";
-import { BrowserRouter, Route, Routes } from "react-router-dom";
+import { BrowserRouter, Navigate, Route, Routes } from "react-router-dom";
 import Login from "./components/Login";
 import Navbar from "./components/Navbar";
 import RecordBooks from "./components/RecordBooks";
@@ -8,6 +8,7 @@ import authStore from "./store/authStore";
 import theme from "./theme";
 import { useEffect } from 'react';
 import Signup from "./components/Signup";
+import RecordBookDetailView from "./components/RecordBookDetailView";
 
 function App() {
 
@@ -42,7 +43,11 @@ function App() {
           {loggedIn && <Navbar logout={logout} />}
           <Routes>
             {loggedIn ? (
-              <Route path="/" element={<RecordBooks />} />
+              <>
+                <Route path="/" element={<Navigate to="/record_books" />} />
+                <Route path="/record_books" element={<RecordBooks />} />
+                <Route path="/record_books/:id" element={<RecordBookDetailView />} />
+              </>
             ) : (
               <>
                 <Route path="/" element={<Login />} />

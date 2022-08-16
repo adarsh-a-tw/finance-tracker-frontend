@@ -17,10 +17,9 @@ function Login() {
   }
 
   return (
-    <Card color='primary' mt={5} sx={{
+    <Card mt={5} sx={{
       maxWidth: 720,
-      margin: "100px auto 0 auto",
-      backgroundColor: theme.palette.light.main
+      margin: "100px auto 0 auto"
     }}>
       <CardContent>
         <Grid container direction="column" justifyContent="center" alignItems="center">
