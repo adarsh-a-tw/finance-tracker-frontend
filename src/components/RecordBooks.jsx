@@ -76,8 +76,8 @@ function RecordBooks() {
           </Grid>
           <Grid item>
 
-            <Fab color="primary" aria-label="add">
-              <AddIcon data-testid="plus-btn" onClick={handleCreateDialogClickOpen} />
+            <Fab color="primary" aria-label="add" onClick={handleCreateDialogClickOpen}>
+              <AddIcon data-testid="plus-btn" />
             </Fab>
           </Grid>
         </Grid>
@@ -117,7 +117,7 @@ function RecordBooks() {
       </Dialog>
 
       <Dialog open={openCreateDialog} onClose={handleCreateDialogClose}>
-        <DialogTitle>Subscribe</DialogTitle>
+        <DialogTitle>Create</DialogTitle>
         <form onSubmit={handleCreateSubmit}>
           <DialogContent>
             <DialogContentText>
