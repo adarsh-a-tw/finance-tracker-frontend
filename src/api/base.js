@@ -32,4 +32,17 @@ export const get = async (url) => {
     }
 }
 
+export const _delete = async (url) => {
+    try {
+        const deleteUrl = BASE_URL + url;
+        await axios.delete(deleteUrl, { headers: { 'x-api-token': authStore.getState().token } });
+    }
+    catch (err) {
+        let msg = err.response ? (err.response.data ? (err.response.data.message ? err.response.data.message : null) : null) : null;
+        msg = msg ? msg : "Something went wrong";
+        alertStore.setState({ type: 'error', message: msg, shouldAlertOpen: true });
+        throw Error("API_ERROR");
+    }
+}
+
 export const BASE_URL = "http://localhost:8000"; 

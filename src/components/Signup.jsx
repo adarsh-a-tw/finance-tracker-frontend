@@ -1,9 +1,8 @@
-import { Button, Card, CardContent, Grid, TextField, Typography } from '@mui/material'
-import React, { useState } from 'react'
-import { Link, useNavigate } from 'react-router-dom'
+import { Button, Card, CardContent, Grid, TextField, Typography } from '@mui/material';
+import { useState } from 'react';
+import { Link, useNavigate } from 'react-router-dom';
 import { createUserAPI } from '../api/user';
 import alertStore from '../store/alertStore';
-import theme from '../theme'
 
 function Signup() {
     const [username, setUsername] = useState('');

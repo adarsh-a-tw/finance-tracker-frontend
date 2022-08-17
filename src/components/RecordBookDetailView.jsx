@@ -24,7 +24,7 @@ export default function RecordBookDetailView() {
             setTags(tags);
         }
         callback();
-    }, []);
+    }, [id]);
 
     return (
         <>

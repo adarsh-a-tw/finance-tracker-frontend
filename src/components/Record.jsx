@@ -1,6 +1,5 @@
-import { Card, CardContent, CardHeader, Chip, Stack, Typography } from "@mui/material";
+import { Card, CardContent, Chip, Stack, Typography } from "@mui/material";
 import moment from "moment";
-import theme from "../theme";
 
 export default function Record({ id, note, amount, type, addedAt, tags }) {
     return (

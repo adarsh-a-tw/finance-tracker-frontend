@@ -2,7 +2,6 @@ import { Button, Card, CardContent, Grid, TextField, Typography } from '@mui/mat
 import React, { useState } from 'react'
 import { Link } from 'react-router-dom'
 import authStore from '../store/authStore';
-import theme from '../theme'
 
 function Login() {
   const [username, setUsername] = useState('');
