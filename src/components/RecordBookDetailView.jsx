@@ -31,7 +31,7 @@ export default function RecordBookDetailView() {
 
     useEffect(() => {
         fetchRecords();
-    }, [id,fetchRecords]);
+    }, [id]);
 
     const handleDelete = async () => {
         await deleteRecordAPI(id, deleteId);

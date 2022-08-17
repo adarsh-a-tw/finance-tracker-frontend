@@ -1,7 +1,7 @@
-import { Grid, Typography } from '@mui/material';
+import { Grid, Typography, TextField } from '@mui/material';
 import { Container } from '@mui/system';
 import React, { useEffect, useState } from 'react'
-import { deleteRecordBookAPI, fetchRecordBooksAPI } from '../api/recordBook';
+import { createRecordBookAPI, deleteRecordBookAPI, fetchRecordBooksAPI } from '../api/recordBook';
 import RecordBook from './RecordBook';
 import Button from '@mui/material/Button';
 import Dialog from '@mui/material/Dialog';
@@ -9,6 +9,8 @@ import DialogActions from '@mui/material/DialogActions';
 import DialogContent from '@mui/material/DialogContent';
 import DialogContentText from '@mui/material/DialogContentText';
 import DialogTitle from '@mui/material/DialogTitle';
+import Fab from '@mui/material/Fab';
+import AddIcon from '@mui/icons-material/Add';
 
 function RecordBooks() {
 
@@ -30,7 +32,7 @@ function RecordBooks() {
   }
 
   const [open, setOpen] = React.useState(false);
-  const [deleteId,setDeleteId] = React.useState(null);
+  const [deleteId, setDeleteId] = React.useState(null);
 
   const handleClickOpen = (id) => {
     setOpen(true);
@@ -42,12 +44,43 @@ function RecordBooks() {
     setDeleteId(null);
   };
 
+  const [openCreateDialog, setOpenCreateDialog] = React.useState(false);
+  const [createName, setCreateName] = useState('');
+
+  const handleCreateDialogClickOpen = () => {
+    setOpenCreateDialog(true);
+  };
+
+  const handleCreateDialogClose = () => {
+    setOpenCreateDialog(false);
+    setCreateName('');
+  };
+
+  const handleCreateSubmit = async (e) => {
+    e.preventDefault();
+    await createRecordBookAPI(createName);
+    await fetchRecordBooks();
+    handleCreateDialogClose();
+  }
+
+
+
   return (
     <>
       <Container maxWidth="sm" sx={{ marginTop: "16px" }}>
-        <Typography color="primary" variant='h4'>
-          My Record Books
-        </Typography>
+        <Grid container direction="row" sx={{ justifyContent: "space-between", alignItems: "center" }}>
+          <Grid item>
+            <Typography color="primary" variant='h4'>
+              My Record Books
+            </Typography>
+          </Grid>
+          <Grid item>
+
+            <Fab color="primary" aria-label="add">
+              <AddIcon data-testid="plus-btn" onClick={handleCreateDialogClickOpen} />
+            </Fab>
+          </Grid>
+        </Grid>
         <Grid container direction="column">
 
           {recordBooks.map((recordBook, index) => {
@@ -81,6 +114,35 @@ function RecordBooks() {
             Delete
           </Button>
         </DialogActions>
+      </Dialog>
+
+      <Dialog open={openCreateDialog} onClose={handleCreateDialogClose}>
+        <DialogTitle>Subscribe</DialogTitle>
+        <form onSubmit={handleCreateSubmit}>
+          <DialogContent>
+            <DialogContentText>
+              Enter a title for the new Record Book.
+            </DialogContentText>
+
+            <TextField
+              autoFocus
+              required
+              margin="dense"
+              id="name"
+              inputProps={{ "data-testid": "name-box" }}
+              label="Title"
+              type="text"
+              fullWidth
+              variant="standard"
+              onChange={(e) => setCreateName(e.target.value)}
+            />
+
+          </DialogContent>
+          <DialogActions>
+            <Button onClick={handleCreateDialogClose}>Cancel</Button>
+            <Button type="submit" data-testid="create-confirm-btn">Create</Button>
+          </DialogActions>
+        </form>
       </Dialog>
     </>
 
